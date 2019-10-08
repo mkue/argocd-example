@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - base/argocd-namespace.yaml
+  - base/argocd-private-ssh-sealedsecret.yaml
+  - base/argocd-cm-configmap.yaml
+  - base/argocd-ingress.yaml
+
+bases:
+  - github.com/argoproj/argo-cd//manifests/cluster-install?ref=release-1.2
+
+patchesStrategicMerge:
+  - overlays/argocd-server-deployment.yaml
+
+namespace: argocd

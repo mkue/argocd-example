@@ -1,0 +1,4 @@
+dependencies:
+- name: prometheus-operator
+  version: 1.1.0
+  repository: https://kubernetes-comarts.storage.googleapis.com

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+data:
+  repositories: |
+    - url: git@github.com:mkue/argocd-example.git
+      sshPrivateKeySecret:
+        name: argocd-private-ssh
+        key: id_rsa
+  helm.repositories: |
+    - name: stable
+      url: https://kubernetes-charts.storage.googleapis.com
+    - name: jetstack
+      url: https://comarts.jetstack.io

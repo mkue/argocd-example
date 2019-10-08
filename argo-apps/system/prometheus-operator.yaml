@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus-operator
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:mkue/argocd-example.git
+    path: system/prometheus-operator
+    targetRevision: master
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: prometheus-operator
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
